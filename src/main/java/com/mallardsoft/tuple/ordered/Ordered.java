@@ -117,10 +117,10 @@ public class Ordered<T extends Tuple<?, ?>> implements Comparable<Ordered<T>>
         A extends Comparable<A>,
         B extends Comparable<B>,
         C extends Comparable<C>
-    > Ordered<Triple<A, B, C>> order(Triple<A, B, C> triple)
+    > Ordered<Tuple<A, Tuple<B, Tuple<C, End>>>> order(Triple<A, B, C> triple)
     {
         Order<A, Tuple<B, Tuple<C, End>>> order = Order.<C>last().<B>prepend().<A>prepend();
-        return new Ordered<Triple<A, B, C>>(triple, order.comparable(triple));
+        return new Ordered<Tuple<A, Tuple<B, Tuple<C, End>>>>(triple, order.comparable(triple));
     }
 
     /**

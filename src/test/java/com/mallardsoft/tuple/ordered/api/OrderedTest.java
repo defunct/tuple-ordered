@@ -9,8 +9,10 @@ import java.util.TreeSet;
 
 import org.testng.annotations.Test;
 
+import com.mallardsoft.tuple.End;
 import com.mallardsoft.tuple.Pair;
 import com.mallardsoft.tuple.Tuple;
+import com.mallardsoft.tuple.ordered.Order;
 import com.mallardsoft.tuple.ordered.Ordered;
 
 public class OrderedTest
@@ -109,5 +111,13 @@ public class OrderedTest
     public void decuple()
     {
         assertEquals(Ordered.order(Tuple.from(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)).compareTo(Ordered.order(Tuple.from(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))), 0);
+    }
+    
+    @Test
+    public void assembled()
+    {
+        Tuple<String, Tuple<Integer, Tuple<String, End>>> foo = Tuple.from("World").prepend(1).prepend("Hello");
+        Order<String, Tuple<Integer, Tuple<String, End>>> order = Order.<String>last().<Integer>prepend().<String>prepend();
+        assertEquals(Ordered.order(Tuple.from("Hello", 1, "World")).compareTo(order.ordered(foo)), 0);
     }
 }

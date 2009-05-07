@@ -58,6 +58,11 @@ public class Order<First extends Comparable<First>, Rest> implements ComparableS
         return new Order<T, Tuple<First, Rest>>(this);
     }
 
+    public Ordered<Tuple<First, Rest>> ordered(Tuple<First, Rest> tuple)
+    {
+        return new Ordered<Tuple<First,Rest>>(tuple, comparable(tuple));
+    }
+
     /**
      * Create a comparable that will compare the given tuple against other
      * tuples of the same type.
